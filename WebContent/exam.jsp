@@ -18,24 +18,17 @@
 <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 <script
 	src="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
+
+<script src="js/sco.countdown.js" type="text/javascript"></script>
+
 <link href="css/index.css" rel="stylesheet" type="text/css" />
-<script src="js/sco.countdown.js"></script>
 
 </head>
 <body>
 
-	<div id="countdowner"
-		style="width: 300px; height: 200px; background: #lightblue;"></div>
-	<script>
-		$('#countdowner').scojs_countdown({
-			until : 1364382956
-		});
-	</script>
-
-
 	<div class="progress progress-striped active">
-		<div class="progress-bar" role="progressbar" aria-valuenow="45"
-			aria-valuemin="0" aria-valuemax="100" style="width: 45%">
+		<div class="progress-bar" role="progressbar" aria-valuenow="20"
+			aria-valuemin="0" aria-valuemax="100" style="width: 10%">
 			<span class="sr-only">45% Complete</span>
 		</div>
 	</div>
