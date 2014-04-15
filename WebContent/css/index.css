@@ -4,12 +4,33 @@ body {
 	padding-bottom: 40px;
 	background-color: #eee;
 }
-.choose{
+.head{
+	width:500px;
+	text-align:right;
+	margin:0 auto;
+	font-size:20px;
+}
+.form-horizontal{
 	width:500px;
 	height:300px;
 	margin:0 auto;
 	background:lightblue;
 }
+.control-group{ 
+	width:500px;
+	height:80px;
+	font-size:20px;
+}
 .control-label{
+	float:left;	
+	width:80px;
+	height:30px;
+	margin-right:20px;
+}
+.controls{
 	float:left;
+	font-size:20px;
+}
+.form-head{
+	text-align:center;
 }
