@@ -22,14 +22,11 @@ public dataconn() {
 public ResultSet executeQuery(String sql) {  
 	rs = null;  
 	try { 
-		System.out.println("Before ResultSet");
 		conn = DriverManager.getConnection(sConnStr,user,password);   
 		stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);  
 		rs = stmt.executeQuery(sql); 
-		System.out.println("After ResultSet");
 		}   
 	catch(Exception ex) {   
-		System.out.println("Exception ResultSet");
 		System.err.println("aq.executeQuery: " + ex.getMessage());  
 		System.err.println("aq.executeQuerystrSQL: " + sql);  
 	}  
@@ -37,16 +34,18 @@ public ResultSet executeQuery(String sql) {
 }  
   
           
-public void executeUpdate(String sql) {  
+public int executeUpdate(String sql) {  
 	try {  
 		conn = DriverManager.getConnection(sConnStr,user,password);   
 		stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);  
-		stmt.executeUpdate(sql);  
+		int res = stmt.executeUpdate(sql);  
+		return res;
 		}   
 	catch(Exception ex) {   
 		System.err.println("aq.executeUpdate: " + ex.getMessage());  
 		System.err.println("aq.executeUpadatestrSQL: " + sql);  
-		}  
+		} 
+	return 0;
 }  
           
 public void closeStmt()  
