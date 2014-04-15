@@ -29,7 +29,7 @@
 				if (session.getAttribute("username") == null) {
 					out.println("<a href='login.jsp'>登陆</a> / <a href='register.jsp'>注册</a>");
 				} else {
-					out.println(session.getAttribute("username"));
+					out.println(session.getAttribute("username")+" / <a href='logout.jsp'>注销</a>");
 				}
 				//session.invalidate();
 			%>
