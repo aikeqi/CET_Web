@@ -1,0 +1,15 @@
+@charset "utf-8";
+body {
+	padding-top: 40px;
+	padding-bottom: 40px;
+	background-color: #eee;
+}
+.choose{
+	width:500px;
+	height:300px;
+	margin:0 auto;
+	background:lightblue;
+}
+.control-label{
+	float:left;
+}
