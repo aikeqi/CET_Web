@@ -21,9 +21,6 @@
 
 </head>
 <body>
-<div id = "main" align="right">
-	<a href="index.jsp"><font size="4">返回</font></a>
-</div>
 <div class="container">
 
 	<form class="form-addword" action="takeword.jsp" method="post">
@@ -74,7 +71,8 @@
 
 				<!-- Button -->
 				<div class="controls">
-					<button class="btn btn-primary">提交</button>
+					<input type="submit" class="btn btn-primary" value="提交" />
+					<a href="index.jsp"><input type="button" class="btn btn-primary" value="返回" /></a>
 				</div>
 			</div>
 
