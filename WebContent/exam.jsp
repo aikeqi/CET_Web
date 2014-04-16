@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import="java.sql.*"%>
+<jsp:useBean id="connDbBean" scope="page" class="dataconn.dataconn" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -25,15 +26,56 @@
 
 </head>
 <body>
-
-	<div class="progress progress-striped active">
-		<div class="progress-bar" role="progressbar" aria-valuenow="20"
-			aria-valuemin="0" aria-valuemax="100" style="width: 10%">
-			<span class="sr-only">45% Complete</span>
+	<%
+		String name = "";
+		String stageone = "";
+		String stagetwo = "";
+		String sql = "SELECT * FROM paper";
+		ResultSet rs = connDbBean.executeQuery(sql);
+		while (rs.next()) {
+			name = rs.getString("name");
+			stageone = rs.getString("stageone");
+			stagetwo = rs.getString("stagetwo");
+		}
+	%>
+	<div class="container">
+		<div class="container-fluid">
+			<div class="row-fluid">
+				<div class="span12">
+					<h3 class="text-center">
+						<%
+							out.println("name");
+						%>
+					</h3>
+				</div>
+			</div>
+			<div class="row-fluid">
+				<div class="span8">
+					<p>
+						<%
+							out.println(stageone);
+							out.println(stagetwo);
+							rs.close();
+						%>
+					</p>
+				</div>
+				<div class="span4">
+					<form>
+						<fieldset>
+							<legend>表单项</legend>
+							<label>表签名</label><input type="text" /> <span class="help-block">这里填写帮助信息.</span>
+							<label class="checkbox"><input type="checkbox" /> 勾选同意</label>
+							<button type="submit" class="btn">提交</button>
+						</fieldset>
+					</form>
+				</div>
+			</div>
 		</div>
+		<div class="left">
+			<p></p>
+		</div>
+		<div class="right"></div>
 	</div>
-
-
 
 
 </body>
