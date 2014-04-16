@@ -1,48 +1,51 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" pageEncoding="UTF-8"%>  
+<%@ page contentType="text/html;charset=UTF-8"%> 
+<!DOCTYPE html>
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>生词本</title>
-
-<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-<script src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
-<script src="js/bootstrap.min.js" type="text/javascript"></script>
-<script src="js/bootstrap.js" type="text/javascript"></script>
-<!-- 自己添加的css -->
-<link rel="stylesheet" href="css/bootstrap.css" type="text/css">
-<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">	
-<link rel="stylesheet" href="css/bootstrap-theme.css" type="text/css">
-<link rel="stylesheet" href="css/bootstrap-theme.min.css" type="text/css">
-
-</head>
-<body>
-<div class="container-fluid">
+  <head>
+    <title>Bootstrap 101 Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/css/bootstrap.min.css">
+	<link href="css/layoutit.css" rel="stylesheet">
+	<link href="css/bootstrap-combined.min.css" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.min.js"></script>
+        <script src="http://cdn.bootcss.com/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <div class="container-fluid">
 	<div class="row-fluid">
 		<div class="span2">
 		</div>
 		<div class="span6">
 			<div class="page-header">
 				<h1>
-					Username <span>的生词本</span>
+					username <small>的生词本</small>
 				</h1>
 			</div>
-			<table class="table">
+			<table class="table table-hover">
 				<thead>
 					<tr>
 						<th>
 							编号
 						</th>
 						<th>
-							产品
+							英文
 						</th>
 						<th>
-							交付时间
+							词性
 						</th>
 						<th>
-							状态
+							释义
 						</th>
 					</tr>
 				</thead>
@@ -147,18 +150,14 @@
 		</div>
 		<div class="span4">
 			<div class="row-fluid">
-				<div class="span12">
-				</div>
-			</div>
-			<div class="row-fluid">
 				<div class="span6">
 				</div>
 				<div class="span6">
-					 <button class="btn btn-large btn-primary btn-block" type="button">按钮</button> <button class="btn btn-large btn-info btn-block" type="button">按钮</button>
+					 <button class="btn btn-large btn-primary btn-block" type="button">添加生词</button> <button class="btn btn-block btn-large btn-info" type="button">返回</button>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
-</body>
+  </body>
 </html>
