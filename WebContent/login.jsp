@@ -24,9 +24,6 @@
 	if (username == null)
 		username = "";
 %>
-<div id = "main" align="right">
-	<a href="index.jsp"><font size="4">返回</font></a>
-</div>
 <div class="container">
 
       <form action="takelogin.jsp" method="post" class="form-signin" role="form">
@@ -37,6 +34,7 @@
 <!--           <input type="checkbox" value="remember-me"> 记住我 -->
 <!--         </label> -->
         <button class="btn btn-lg btn-primary btn-block" type="submit">登陆</button>
+        <a href="index.jsp"><input class="btn btn-lg btn-primary btn-block" type="submit" value="返回" /></a>
       </form>
 
     </div> <!-- /container -->
