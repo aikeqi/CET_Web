@@ -34,7 +34,7 @@
 				else
 				{
 					int bookid = username.hashCode();
-					sql = sql = "insert into user (name, password, bookid) values ('" + username + "','" + password1 + "'," + bookid + ");";
+					sql = "insert into user (name, password, bookid) values ('" + username + "','" + password1 + "'," + bookid + ");";
 					int res  = connDbBean.executeUpdate(sql);
 					if(res != 0)
 					{

@@ -23,6 +23,7 @@
 				out.println("成功！");
 				session.setAttribute("username", username);
 				session.setAttribute("password", password);
+				session.setAttribute("bookid", rs.getString("bookid"));
 				response.sendRedirect("index.jsp");
 			}else{
 				out.println("失败");
