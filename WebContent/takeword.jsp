@@ -20,44 +20,34 @@
 	
 	try {
 		String sql = "select * from user where name='"+username +"'";
+		bookid = (String)session.getAttribute("bookid");
+		out.println(bookid);
+		///rs.close();
+		sql = "select * from book where bookid='" + bookid + "' AND english='" + word + "' AND chinese='" + meaning + "'";
 		rs = connDbBean.executeQuery(sql);
 		if (rs.next())
-		{
-			bookid = rs.getString("bookid");
-			out.println(bookid);
-			///rs.close();
-			sql = "select * from book where bookid='" + bookid + "' AND english='" + word + "' AND chinese='" + meaning + "'";
-			rs = connDbBean.executeQuery(sql);
-			if (rs.next())
-			{	
-				out.println("该单词已存在");
-			}
-			else
-			{
-				//rs.close();
-				sql = "insert into book(bookid, english, englishtype, chinese) values ("+bookid + ",'"+ word + "','" + type + "','" + meaning + "');";
-				out.println(sql);
-				int res = connDbBean.executeUpdate(sql);
-				if (res != 0)
-					out.println("单词添加成功");
-				else
-					System.out.println("单词添加失败，请稍后重试");
-			}
-			out.println("44444444");
-			response.sendRedirect("addword.jsp");
+		{	
+			out.println("该单词已存在");
 		}
 		else
 		{
-			out.println("该用户不存在,请重新登录");
-			session.invalidate();
-			response.sendRedirect("index.jsp");
+			//rs.close();
+			sql = "insert into book(bookid, english, englishtype, chinese) values ("+bookid + ",'"+ word + "','" + type + "','" + meaning + "');";
+			out.println(sql);
+			int res = connDbBean.executeUpdate(sql);
+			if (res != 0)
+				out.println("单词添加成功");
+			else
+				System.out.println("单词添加失败，请稍后重试");
 		}
-		rs.close();
-		connDbBean.closeStmt();
-		connDbBean.closeConn();
+		out.println("44444444");
+		response.sendRedirect("addword.jsp");
 	} catch(Exception ex) {
 		System.out.println("exception");
 	}
+	rs.close();
+	connDbBean.closeStmt();
+	connDbBean.closeConn();
 %>
 </body>
 </html>

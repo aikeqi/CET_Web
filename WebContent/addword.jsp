@@ -44,13 +44,13 @@
 				<label class="control-label">选择词性</label>
 				<div class="controls">
 					<select class="input-xlarge" name="type">
-						<option value="verb">v.</option>
-						<option value="noun">n.</option>
-						<option value="adj">adj.</option>
-						<option value="adv">adv.</option>
-						<option value="conj">conj.</option>
-						<option value="pron">pron.</option>
-						<option value="prep">prep.</option>
+						<option value="v.">v.</option>
+						<option value="n.">n.</option>
+						<option value="adj.">adj.</option>
+						<option value="adv.">adv.</option>
+						<option value="conj.">conj.</option>
+						<option value="pron.">pron.</option>
+						<option value="prep.">prep.</option>
 					</select>
 				</div>
 
