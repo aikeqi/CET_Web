@@ -4,37 +4,34 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>CET注册</title>
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link href="css/layoutit.css" rel="stylesheet">
+<link href="css/bootstrap-combined.min.css" rel="stylesheet">
+<script src="js/jquery.min.js"></script>
+<!-- 可选的Bootstrap主题文件（一般不用引入） -->
+<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="js/bootstrap.min.js"></script>
+<link href="css/login.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
-<center>
-	<div id="main">
-        <form action="takeregister.jsp" mothod="post">
-        	<table>
-            	<th colspan="2">注册</th>
-                <tr>
-                	<td>用户名： </td>
-                    <td><input type="text"  id="username" name="username" /></td>
-                    <td>1-12位数字及字母</td>
-                </tr>
-                <tr>
-                	<td>密 码： </td>
-                    <td><input type="password" id="password1" name="password1" /></td>
-                </tr>
-                <tr>
-                	<td>确认密码:</td>
-                    <td><input type="password" id="password2" name="password2" /></td>
-                </tr>
-                <tr>
-                	<td colspan="2" align="center">
-                    	<a href="index.jsp"><input name="按钮" type="button" id="return" value="返回" /></a>
-                        <input type="reset" value="重置" id="reset" />
-                        <input type="submit" value="注册" id="submit" />
-                  </td>
-                </tr>
-            </table>
-        </form>
-    </div>
-</center>
+<div class="container">
+
+      <form action="takeregister.jsp" method="post" class="form-signin" role="form">
+        <h2 class="form-signin-heading">用户注册</h2>
+        <input name="username" type="text" class="form-control" placeholder="用户名" required autofocus>
+        <input name="password1" type="password" class="form-control" placeholder="密码" required>
+        <input name="password2" type="password" class="form-control" placeholder="确认密码" required>
+<!--         <label class="checkbox"> -->
+<!--           <input type="checkbox" value="remember-me"> 记住我 -->
+<!--         </label> -->
+        <input class="btn btn-lg btn-primary btn-block" type="submit" value="注册" />
+        <br>
+        <a href="index.jsp"><input class="btn btn-lg btn-primary btn-block" type="button" value="返回" /></a>
+      </form>
+
+</div> <!-- /container -->
+
 </body>
 </html>
