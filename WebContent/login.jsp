@@ -1,10 +1,9 @@
 <%@ page contentType="text/html; charset=utf-8" language="java" import="java.sql.*" errorPage="" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!doctype html>
+<html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>CET登录</title>
-<<<<<<< HEAD
+<meta charset="utf-8">
+<title>用户登录</title>
 <!-- 最新的 Bootstrap 核心文件 -->
 <link rel="stylesheet" href="css/bootstrap.css" />
 <!-- 可选的Bootstrap主题文件（一般不用引入） -->
@@ -14,48 +13,37 @@
 <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 <script type="text/javascript" src="js/bootstrap.js"></script>
 
-=======
-<!-- 最新 Bootstrap 核心 CSS 文件 -->
-<link rel="stylesheet" href="css/bootstrap.min.css">
-
-<!-- 可选的Bootstrap主题文件（一般不用引入） -->
-<link rel="stylesheet" href="css/bootstrap-theme.min.css">
-
-<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-<script src="js/jquery.min.js"></script>
-
-<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-<script src="js/bootstrap.min.js"></script>
->>>>>>> origin/master
-<link href="css/login.css" rel="stylesheet" type="text/css" />
+<!-- 外加样式表 -->
+<link rel="stylesheet" href="css/login.css" />
 </head>
 
 <body>
-<%
-	String username = (String)session.getAttribute("username");
-	if (username == null)
-		username = "";
-%>
 <div class="container">
-
-      <form action="takelogin.jsp" method="post" class="form-signin" role="form">
-        <h2 class="form-signin-heading">用户登录</h2>
-<<<<<<< HEAD
-        <input value="<%=username%>" name="username" type="text" class="form-control" placeholder="用户名" required autofocus  />
-        <input name="password" type="password" class="form-control" placeholder="密码" required />
-        <button class="btn btn-lg btn-primary btn-block" type="submit">登陆</button>
-=======
-        <input value="<%=username%>" name="username" type="text" class="form-control" placeholder="用户名" required autofocus>
-        <input name="password" type="password" class="form-control" placeholder="密码" required>
-<!--         <label class="checkbox"> -->
-<!--           <input type="checkbox" value="remember-me"> 记住我 -->
-<!--         </label> -->
-        <input class="btn btn-lg btn-primary btn-block" type="submit" value="登陆" />
-        <br>
-        <a href="index.jsp"><input class="btn btn-lg btn-primary btn-block" type="button" value="返回" /></a>
->>>>>>> origin/master
-      </form>
-
-    </div> <!-- /container -->
+  <div class="login-form">
+    <form class="form-horizontal" role="form" action="takelogin.jsp" method="post">
+      <h2 class="form-head text-center">用户登陆</h2>
+      <div class="form-group">
+        <label class="col-sm-3 control-label" for="username">用户名</label>
+        <div class="col-sm-8">
+          <input class="form-control" type="text" placeholder="输入用户名" autofocus="" required="" name="username" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-3 control-label" for="passwrod">密码</label>
+        <div class="col-sm-8">
+          <input class="form-control" type="password" placeholder="输入密码" required="" name="password" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-3 control-label" for="register"></label>
+        <div class="col-sm-8">
+          <button type="submit" name="login" class="btn btn-primary">&nbsp;&nbsp;登陆&nbsp;&nbsp;</button>
+          <a href="index.jsp">
+          <button type="button" class="btn btn-primary">&nbsp;&nbsp;返回&nbsp;&nbsp;</button>
+          </a> </div>
+      </div>
+    </form>
+  </div>
+</div>
 </body>
 </html>
