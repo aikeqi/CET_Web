@@ -33,8 +33,9 @@
 <!--         <label class="checkbox"> -->
 <!--           <input type="checkbox" value="remember-me"> 记住我 -->
 <!--         </label> -->
-        <button class="btn btn-lg btn-primary btn-block" type="submit">登陆</button>
-        <a href="index.jsp"><input class="btn btn-lg btn-primary btn-block" type="submit" value="返回" /></a>
+        <input class="btn btn-lg btn-primary btn-block" type="submit" value="登陆" />
+        <br>
+        <a href="index.jsp"><input class="btn btn-lg btn-primary btn-block" type="button" value="返回" /></a>
       </form>
 
     </div> <!-- /container -->
