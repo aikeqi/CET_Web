@@ -22,14 +22,14 @@
     <script src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
-    <div class="container-fluid">
+<div class="container-fluid">
 	<div class="row-fluid">
 		<div class="span2">
 		</div>
 		<div class="span6">
 			<div class="page-header">
 				<h1>
-					username <small>的生词本</small>
+					username <span>的生词本</span>
 				</h1>
 			</div>
 			<table class="table table-hover">
@@ -39,7 +39,7 @@
 							编号
 						</th>
 						<th>
-							英文
+							英语
 						</th>
 						<th>
 							词性
@@ -150,10 +150,16 @@
 		</div>
 		<div class="span4">
 			<div class="row-fluid">
-				<div class="span6">
+				<div class="span12">
+				</div>
+			</div>
+			<div class="row-fluid">
+				<div class="span2">
 				</div>
 				<div class="span6">
-					 <button class="btn btn-large btn-primary btn-block" type="button">添加生词</button> <button class="btn btn-block btn-large btn-info" type="button">返回</button>
+					 <button class="btn btn-block btn-large btn-primary" type="button">添加生词</button> <button class="btn btn-block btn-large btn-info" type="button">返回</button>
+				</div>
+				<div class="span4">
 				</div>
 			</div>
 		</div>
