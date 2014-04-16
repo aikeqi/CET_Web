@@ -1,5 +1,6 @@
-<%@ page language="java" pageEncoding="UTF-8"%>  
-<%@ page contentType="text/html;charset=UTF-8"%> 
+<%@ page contentType="text/html; charset=utf-8" language="java"
+	import="java.sql.*" errorPage=""%>
+<jsp:useBean id="connDbBean" scope="page" class="dataconn.dataconn"/>
 <!DOCTYPE html>
 <html>
   <head>
@@ -22,6 +23,37 @@
     <script src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
+
+<%
+	String username = (String)session.getAttribute("username");
+	String bookid = (String)session.getAttribute("bookid");
+	String[] classes = {"success", "error", "warning", "info"};
+	
+	int page_persize=4;//每页显示记录数
+	int page_total=0;//总的页数
+	int page_now=1;//当前页码
+	int rs_total=0;//总的记录数
+	
+	String sql="select  * from book where bookid=" + bookid + ";";
+	try {
+		ResultSet rs = connDbBean.executeQuery(sql);
+		
+		rs.last();//指针到最后一条记录
+		rs_total=rs.getRow();//读出当前行号即总的记录数
+		if (rs_total % page_persize==0)
+		    page_total=rs_total/page_persize;
+		else
+		    page_total=rs_total/page_persize+1;
+		
+		try{
+			if (!(request.getParameter("page_now")==null || request.getParameter("page_now").equals("")))
+				page_now=Math.min(Math.abs(Integer.parseInt(request.getParameter("page_now"))),page_total);
+			}catch(java.lang.NumberFormatException e){
+				out.print("指定页码格式不正确"+e);
+			}
+		if (page_now==0) page_now=1;
+		%>
+	    
 <div class="container-fluid">
 	<div class="row-fluid">
 		<div class="span2">
@@ -29,7 +61,7 @@
 		<div class="span6">
 			<div class="page-header">
 				<h1>
-					username <span>的生词本</span>
+					<%=username %> <small>的生词本</small>
 				</h1>
 			</div>
 			<table class="table table-hover">
@@ -50,101 +82,62 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
+				 <%
+				 	rs.absolute((page_now-1)*page_persize+1);
+					
+					//当前页输出
+				    rs.previous();
+				 	for (int i = 1; i <= page_persize; i++)
+				 	{
+				 		if (!rs.next()) break;//如果记录数不够则中断循环
+				 	%>
+				 		<tr class="<%=classes[i - 1] %>">
 						<td>
-							1
+							<%=(page_now-1)*page_persize+i %>
 						</td>
 						<td>
-							TB - Monthly
+							<%=rs.getString("english") %>
 						</td>
 						<td>
-							01/04/2012
+							<%=rs.getString("englishtype") %>
 						</td>
 						<td>
-							Default
-						</td>
-					</tr>
-					<tr class="success">
-						<td>
-							1
-						</td>
-						<td>
-							TB - Monthly
-						</td>
-						<td>
-							01/04/2012
-						</td>
-						<td>
-							Approved
+							<%=rs.getString("chinese") %>
 						</td>
 					</tr>
-					<tr class="error">
-						<td>
-							2
-						</td>
-						<td>
-							TB - Monthly
-						</td>
-						<td>
-							02/04/2012
-						</td>
-						<td>
-							Declined
-						</td>
-					</tr>
-					<tr class="warning">
-						<td>
-							3
-						</td>
-						<td>
-							TB - Monthly
-						</td>
-						<td>
-							03/04/2012
-						</td>
-						<td>
-							Pending
-						</td>
-					</tr>
-					<tr class="info">
-						<td>
-							4
-						</td>
-						<td>
-							TB - Monthly
-						</td>
-						<td>
-							04/04/2012
-						</td>
-						<td>
-							Call in to confirm
-						</td>
-					</tr>
+				 	<%
+				 	
+				 	}
+				 %>
+					
+					
 				</tbody>
 			</table>
 			<div class="pagination">
 				<ul>
-					<li>
-						<a href="#">上一页</a>
-					</li>
-					<li>
-						<a href="#">1</a>
-					</li>
-					<li>
-						<a href="#">2</a>
-					</li>
-					<li>
-						<a href="#">3</a>
-					</li>
-					<li>
-						<a href="#">4</a>
-					</li>
-					<li>
-						<a href="#">5</a>
-					</li>
-					<li>
-						<a href="#">下一页</a>
-					</li>
+				<%
+					if (page_now != 1)
+					{
+						out.print("<li><a href=?page_now=1>首页</a></li>"); 
+						out.print("<li><a href=?page_now="+(page_now-1)+">上一页</a></li>");
+					}
+// 					else
+// 					{
+// 						out.print("<li><a>首页</a></li>"); 
+// 						out.print("<li><a>上一页</a></li>");
+// 					}
+					out.print("<li><a>第" + page_now + "页</a></li>");
+					if (page_now != page_total)
+					{
+						out.print("<li><a href=?page_now="+(page_now+1)+">下一页</a></li>");
+						out.print("<li><a href=?page_now="+page_total+">尾页</a></li>");
+					}
+// 					else
+// 					{
+// 						out.print("<li><a>下一页</a></li>");
+// 						out.print("<li><a>尾页</a></li>");
+// 					}
+				%>
 				</ul>
 			</div>
 		</div>
@@ -157,7 +150,10 @@
 				<div class="span2">
 				</div>
 				<div class="span6">
-					 <button class="btn btn-block btn-large btn-primary" type="button">添加生词</button> <button class="btn btn-block btn-large btn-info" type="button">返回</button>
+					 <a href="addword.jsp"><input  class="btn btn-block btn-large btn-primary" type="button" value="添加生词 "/></a>
+					 
+					 <hr />
+					 <a href="index.jsp"><input class="btn btn-block btn-large btn-info" type="button" value="返回" /></a>
 				</div>
 				<div class="span4">
 				</div>
@@ -165,5 +161,13 @@
 		</div>
 	</div>
 </div>
+	    <%
+		rs.close(); 
+	} catch(Exception e) {
+		
+	} 
+	connDbBean.closeStmt();     
+	connDbBean.closeConn(); 
+%> 
   </body>
 </html>
