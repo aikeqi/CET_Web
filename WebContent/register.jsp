@@ -27,7 +27,7 @@
                 </tr>
                 <tr>
                 	<td colspan="2" align="center">
-                    	<a href="login.jsp"><input name="按钮" type="button" id="return" value="返回" /></a>
+                    	<a href="index.jsp"><input name="按钮" type="button" id="return" value="返回" /></a>
                         <input type="reset" value="重置" id="reset" />
                         <input type="submit" value="注册" id="submit" />
                   </td>

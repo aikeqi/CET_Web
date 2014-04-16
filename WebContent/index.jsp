@@ -20,6 +20,10 @@
 		<script
 			src="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
 		<link href="css/index.css" rel="stylesheet" type="text/css" />
+<style >
+#function{
+	float:left}
+</style>
 </head>
 
 <body>
@@ -29,6 +33,12 @@
 				if (session.getAttribute("username") == null) {
 					out.println("<a href='login.jsp'>登陆</a> / <a href='register.jsp'>注册</a>");
 				} else {
+					%>
+					<div id="function">
+					<a href = "addword.jsp">生词本</a>
+					<a href = "">继续上一次</a>
+					</div>
+					<%
 					out.println(session.getAttribute("username")+" / <a href='logout.jsp'>注销</a>");
 				}
 				//session.invalidate();
@@ -71,6 +81,7 @@
 					<div class="controls">
 						<button class="btn btn-primary">确定</button>
 					</div>
+					
 				</div>
 			</fieldset>
 		</form>

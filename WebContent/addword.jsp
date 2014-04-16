@@ -21,9 +21,12 @@
 
 </head>
 <body>
+<div id = "main" align="right">
+	<a href="index.jsp"><font size="4">返回</font></a>
+</div>
 <div class="container">
 
-	<form class="form-addword">
+	<form class="form-addword" action="takeword.jsp" method="post">
 		<fieldset>
 			<div id="legend" class="head">
 				<legend class="">添加生词</legend>
@@ -33,7 +36,7 @@
 				<!-- Text input-->
 				<label class="control-label" for="input01">生词</label>
 				<div class="controls">
-					<input placeholder="在此添加生词" class="input-xlarge" type="text">
+					<input placeholder="在此添加生词" class="input-xlarge" type="text" name="word">
 					<p class="help-block"></p>
 				</div>
 			</div>
@@ -43,10 +46,14 @@
 				<!-- Select Basic -->
 				<label class="control-label">选择词性</label>
 				<div class="controls">
-					<select class="input-xlarge">
-						<option>动词</option>
-						<option>名词</option>
-						<option>形容词</option>
+					<select class="input-xlarge" name="type">
+						<option value="verb">v.</option>
+						<option value="noun">n.</option>
+						<option value="adj">adj.</option>
+						<option value="adv">adv.</option>
+						<option value="conj">conj.</option>
+						<option value="pron">pron.</option>
+						<option value="prep">prep.</option>
 					</select>
 				</div>
 
@@ -57,7 +64,7 @@
 				<!-- Text input-->
 				<label class="control-label" for="input01">词意</label>
 				<div class="controls">
-					<input placeholder="输入单词意思" class="input-xlarge" type="text">
+					<input placeholder="输入单词意思" class="input-xlarge" type="text" name="meaning">
 					<p class="help-block"></p>
 				</div>
 			</div>
