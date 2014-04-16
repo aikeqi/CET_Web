@@ -14,7 +14,6 @@
 		request.setCharacterEncoding("utf-8");
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-
 		
 		try {
 			String sql = "select * from user where name='"+username+"' AND password='"+password+"'";
@@ -27,6 +26,8 @@
 				response.sendRedirect("index.jsp");
 			}else{
 				out.println("失败");
+				session.setAttribute("username", username);
+				response.sendRedirect("login.jsp");
 			}
 			rs.close();
 			connDbBean.closeStmt();

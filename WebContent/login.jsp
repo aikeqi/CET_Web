@@ -19,15 +19,23 @@
 </head>
 
 <body>
+<%
+	String username = (String)session.getAttribute("username");
+	if (username == null)
+		username = "";
+%>
+<div id = "main" align="right">
+	<a href="index.jsp"><font size="4">返回</font></a>
+</div>
 <div class="container">
 
       <form action="takelogin.jsp" method="post" class="form-signin" role="form">
         <h2 class="form-signin-heading">用户登录</h2>
-        <input name="username" type="text" class="form-control" placeholder="用户名" required autofocus>
+        <input value="<%=username%>" name="username" type="text" class="form-control" placeholder="用户名" required autofocus>
         <input name="password" type="password" class="form-control" placeholder="密码" required>
-        <label class="checkbox">
-          <input type="checkbox" value="remember-me"> 记住我
-        </label>
+<!--         <label class="checkbox"> -->
+<!--           <input type="checkbox" value="remember-me"> 记住我 -->
+<!--         </label> -->
         <button class="btn btn-lg btn-primary btn-block" type="submit">登陆</button>
       </form>
 
