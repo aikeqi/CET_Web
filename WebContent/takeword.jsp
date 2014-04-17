@@ -6,6 +6,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>单词本功能</title>
+<SCRIPT language=javascript>
+	function go()
+	{
+	 window.history.go(-1);
+	}
+	setTimeout("go()",0);
+</SCRIPT>
 </head>
 <body>
 <%
@@ -18,34 +25,39 @@
 	String meaning = request.getParameter("meaning");
 	ResultSet rs= null;
 	
-	try {
-		String sql = "select * from user where name='"+username +"'";
-		bookid = (String)session.getAttribute("bookid");
-		out.println(bookid);
-		///rs.close();
-		sql = "select * from book where bookid='" + bookid + "' AND english='" + word + "' AND chinese='" + meaning + "'";
-		rs = connDbBean.executeQuery(sql);
-		if (rs.next())
-		{	
-			out.println("该单词已存在");
-		}
-		else
-		{
-			//rs.close();
-			sql = "insert into book(bookid, english, englishtype, chinese) values ("+bookid + ",'"+ word + "','" + type + "','" + meaning + "');";
-			out.println(sql);
-			int res = connDbBean.executeUpdate(sql);
-			if (res != 0)
-				out.println("单词添加成功");
+	out.println(word + "  "  + type + "   " + meaning); 
+	
+	if (word != null && !word.equals(""))
+	{
+		try {
+			String sql = "select * from user where name='"+username +"'";
+			bookid = (String)session.getAttribute("bookid");
+			out.println(bookid);
+			///rs.close();
+			sql = "select * from book where bookid='" + bookid + "' AND english='" + word + "' AND chinese='" + meaning + "'";
+			rs = connDbBean.executeQuery(sql);
+			if (rs.next())
+			{	
+				out.println("该单词已存在");
+			}
 			else
-				System.out.println("单词添加失败，请稍后重试");
+			{
+				//rs.close();
+				sql = "insert into book(bookid, english, englishtype, chinese) values ("+bookid + ",'"+ word + "','" + type + "','" + meaning + "');";
+				out.println(sql);
+				int res = connDbBean.executeUpdate(sql);
+				if (res != 0)
+					out.println("单词添加成功");
+				else
+					System.out.println("单词添加失败，请稍后重试");
+			}
+			
+		} catch(Exception ex) {
+			System.out.println("exception");
 		}
-		out.println("44444444");
-		response.sendRedirect("addword.jsp");
-	} catch(Exception ex) {
-		System.out.println("exception");
+		rs.close();
 	}
-	rs.close();
+	//response.sendRedirect("addword.jsp");
 	connDbBean.closeStmt();
 	connDbBean.closeConn();
 %>

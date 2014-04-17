@@ -36,7 +36,7 @@
 					%>
 					<div id="function">
 					<a href = "wordlist.jsp">生词本</a>
-					<a href = "">继续上一次</a>
+					<a href = "takeExam.jsp">继续上一次</a>
 					</div>
 					<%
 					out.println(session.getAttribute("username")+" / <a href='logout.jsp'>注销</a>");

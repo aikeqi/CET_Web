@@ -68,7 +68,7 @@ function addword(){
 					<%
 						for (int i = 1; i <= 20; i++) {
 							out.println("<P>");
-							out.println("<label style=\"width:60px;\">第" + i
+							out.println("<label style=\"width:62px;\">第" + i
 									+ "题&nbsp;&nbsp;&nbsp;&nbsp;</label>");
 							out.println("<label><input type=\"radio\" checked=\"checked\" name=\""
 									+ i + "\" value=\"A\" /> A</label>");
@@ -83,6 +83,9 @@ function addword(){
 					%>
 					<button type="button" class="btn btn-primary btn-lg btn-block"
 						name="submit">&nbsp;&nbsp;提交&nbsp;&nbsp;</button>
+					</form>
+					
+					<form action="takeword.jsp" method="post">
 					<!-- 弹出对话框触发按钮-->
 					<button type="button" class="btn btn-default btn-lg btn-block"
 						data-toggle="modal" data-target="#myModal" name="addword">添加生词</button>
@@ -97,14 +100,12 @@ function addword(){
 									<h4 class="modal-title" id="myModalLabel">添加生词</h4>
 								</div>
 								<div class="modal-body" id="modal-body-id">
-									<form>
 										<fieldset>
 											<div class="control-group">
-
 												<!-- Text input-->
 												<label class="control-label" for="input01">生词</label>
 												<div class="controls">
-													<input placeholder="在此添加生词" class="input-xlarge"
+													<input name="word" placeholder="在此添加生词" class="input-xlarge"
 														type="text">
 													<p class="help-block"></p>
 												</div>
@@ -115,10 +116,14 @@ function addword(){
 												<!-- Select Basic -->
 												<label class="control-label">选择词性</label>
 												<div class="controls">
-													<select class="input-xlarge">
-														<option>动词</option>
-														<option>名词</option>
-														<option>形容词</option>
+													<select name="type" class="input-xlarge">
+														<option value="v.">v.</option>
+														<option value="n.">n.</option>
+														<option value="adj.">adj.</option>
+														<option value="adv.">adv.</option>
+														<option value="conj.">conj.</option>
+														<option value="pron.">pron.</option>
+														<option value="prep.">prep.</option>
 													</select>
 												</div>
 
@@ -129,25 +134,26 @@ function addword(){
 												<!-- Text input-->
 												<label class="control-label" for="input01">词意</label>
 												<div class="controls">
-													<input placeholder="输入单词意思" class="input-xlarge"
+													<input name="meaning" placeholder="输入单词意思" class="input-xlarge"
 														type="text">
 													<p class="help-block"></p>
 												</div>
 											</div>
 										</fieldset>
+									
 								</div>
 								<div class="modal-footer">
 									<button type="button" class="btn btn-default"
 										data-dismiss="modal">关闭</button>
-									<button type="button" class="btn btn-primary">保存</button>
+									<button type="submit" class="btn btn-primary">保存</button>
 								</div>
+								</form>
 							</div>
 							<!-- /.modal-content -->
 						</div>
 						<!-- /.modal-dialog -->
 					</div>
 					<!-- /.modal -->
-				</form>
 			</div>
 		</div>
 	</div>

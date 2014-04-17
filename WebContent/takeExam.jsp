@@ -6,13 +6,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>继续上一次页面</title>
+<title>准备考试页面</title>
 </head>
 
 <body>
 	<%
 		String bookid = (String)session.getAttribute("bookid");
-		String sql = "select * from user where booid='" + bookid + "'";
+		String sql = "select * from user where bookid='" + bookid + "'";
 		
 		String state = null;
 		String time = null;
@@ -21,6 +21,7 @@
 		String translation = null;
 		
 		try {
+			
 			ResultSet rs = connDbBean.executeQuery(sql);
 			if (rs.next())
 			{

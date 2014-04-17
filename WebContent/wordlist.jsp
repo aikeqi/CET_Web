@@ -91,7 +91,7 @@
 				 	{
 				 		if (!rs.next()) break;//如果记录数不够则中断循环
 				 	%>
-				 		<tr class="<%=classes[i - 1] %>">
+				 		<tr class="<%=classes[(i - 1) % 4] %>">
 						<td>
 							<%=(page_now-1)*page_persize+i %>
 						</td>
@@ -121,22 +121,22 @@
 						out.print("<li><a href=?page_now=1>首页</a></li>"); 
 						out.print("<li><a href=?page_now="+(page_now-1)+">上一页</a></li>");
 					}
-// 					else
-// 					{
-// 						out.print("<li><a>首页</a></li>"); 
-// 						out.print("<li><a>上一页</a></li>");
-// 					}
+					else
+					{
+						out.print("<li><a>首页</a></li>"); 
+						out.print("<li><a>上一页</a></li>");
+					}
 					out.print("<li><a>第" + page_now + "页</a></li>");
 					if (page_now != page_total)
 					{
 						out.print("<li><a href=?page_now="+(page_now+1)+">下一页</a></li>");
 						out.print("<li><a href=?page_now="+page_total+">尾页</a></li>");
 					}
-// 					else
-// 					{
-// 						out.print("<li><a>下一页</a></li>");
-// 						out.print("<li><a>尾页</a></li>");
-// 					}
+					else
+					{
+						out.print("<li><a>下一页</a></li>");
+						out.print("<li><a>尾页</a></li>");
+					}
 				%>
 				</ul>
 			</div>
