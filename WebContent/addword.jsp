@@ -72,7 +72,7 @@
 				<!-- Button -->
 				<div class="controls">
 					<input type="submit" class="btn btn-primary" value="提交" />
-					<a href="index.jsp"><input type="button" class="btn btn-primary" value="返回" /></a>
+					<a href="wordlist.jsp"><input type="button" class="btn btn-primary" value="返回" /></a>
 				</div>
 			</div>
 

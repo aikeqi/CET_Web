@@ -35,7 +35,7 @@
 				} else {
 					%>
 					<div id="function">
-					<a href = "addword.jsp">生词本</a>
+					<a href = "wordlist.jsp">生词本</a>
 					<a href = "">继续上一次</a>
 					</div>
 					<%
