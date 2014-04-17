@@ -93,9 +93,9 @@
 
 					function getInputValue() {
 						var str = "";
-						var topicId = document.getElementsByName("topic");
+						var topicId = document.getElementsByName("choose");
 						for (var k = 0; k <= topicId.length; k++) {
-							var topic = document.getElementsByName("topic" + k);
+							var topic = document.getElementsByName("choose" + k);
 							for (var i = 0; i < topic.length; i++) {
 								if (topic[i].checked == true) {
 									if (str == "") {
@@ -115,7 +115,7 @@
 			</h1>
 		</div>
 		<div class="row">
-			<div class="col-md-8" style="background: lightblue;">
+			<div class="col-md-8" style="background: lightblue; overflow-y:scroll; height:800px;">
 				<h1 class="text-center"><%=name%></h1>
 				<p>
 					<%
@@ -139,56 +139,83 @@
 						<div class="span12">
 							<div class="tabbable" id="tabs-780530">
 								<ul class="nav nav-tabs">
-									<li class="active"><a href="#panel-1" data-toggle="tab">第一部分</a>
-									</li>
-									<li><a href="#panel-2" data-toggle="tab">第二部分</a></li>
-									<li><a href="#panel-3" data-toggle="tab">第三部分</a></li>
+									<li><a href="#panel-3" data-toggle="tab">作文</a></li>
+									<li class="active"><a href="#panel-1" data-toggle="tab">听力</a></li>
+									<li><a href="#panel-2" data-toggle="tab">阅读理解</a></li>
+									<li><a href="#panel-4" data-toggle="tab">翻译</a></li>
 								</ul>
 								<div class="tab-content">
-									<div class="tab-pane active" id="panel-1">
-
-
+									<div class="tab-pane active" id="panel-1" style="overflow-y:scroll; height:500px;">
+										<h4>选择题</h4>
 										<%
-											for (int i = 1; i <= 20; i++) {
-												out.println("<P name=\"topic\">");
-												out.println("<label style=\"width:60px;\">第" + i
+											for (int i = 1; i <= 25; i++) {
+												out.println("<P name=\"choose\">");
+												out.println("<label style=\"width:62px;\">第" + i
 														+ "题&nbsp;&nbsp;&nbsp;&nbsp;</label>");
-												out.println("<label><input type=\"radio\" checked=\"checked\" name=\"topic"
+												out.println("<label><input type=\"radio\" checked=\"checked\" name=\"choose"
 														+ i + "\" value=\"A\" /> A</label>");
-												out.println("<label><input type=\"radio\" name=\"topic" + i
+												out.println("<label><input type=\"radio\" name=\"choose" + i
 														+ "\" value=\"B\" /> B</label>");
-												out.println("<label><input type=\"radio\" name=\"topic" + i
+												out.println("<label><input type=\"radio\" name=\"choose" + i
 														+ "\" value=\"C\" /> C</label>");
-												out.println("<label><input type=\"radio\" name=\"topic" + i
+												out.println("<label><input type=\"radio\" name=\"choose" + i
 														+ "\" value=\"D\" /> D</label>");
 												out.println("</P>");
 											}
 										%>
+										<h4>填空</h4>
+										<% 
+											for(int i=26; i<= 35; i++){
+												out.println("<div class=\"form-group\">");
+												out.println("<label for=\"inputAnswer\" class=\"col-sm-2 control-label\">第"+i+"题</label>");
+												out.println("<div class=\"col-sm-8\">");
+												out.println("<input name=\"fill_blank"+ i +"\"type=\"text\" class=\"form-control\" id=\"inputAnswer\" placeholder=\"请输入答案\">");
+												out.println("</div>");
+												out.println("</div>");
+											}
+										%>
 									</div>
-									<div class="tab-pane" id="panel-2">
+									<div class="tab-pane" id="panel-2" style="overflow-y:scroll; height:500px;">
 										<p>
-										<h3>作文</h3>
-										<textarea cols="40" rows="5"></textarea>
-										<br>
-										<h3>填空题</h3>
+										<h4>完形填空</h4>
 										<%
-										for(int i=26; i<= 45; i++){
+										for(int i=36; i<= 45; i++){
 											out.println("<div class=\"form-group\">");
 											out.println("<label for=\"inputAnswer\" class=\"col-sm-2 control-label\">第"+i+"题</label>");
 											out.println("<div class=\"col-sm-8\">");
-											out.println("<input type=\"text\" class=\"form-control\" id=\"inputAnswer\" placeholder=\"请输入答案\">");
+											out.println("<input name=\"fill_blank"+ i +"\"type=\"text\" class=\"form-control\" id=\"inputAnswer\" placeholder=\"请输入答案\">");
 											out.println("</div>");
 											out.println("</div>");
+										}
+										%>
+										<h4>阅读</h4>
+										<%
+										for (int i = 46; i <= 65; i++) {
+											out.println("<P name=\"choose\">");
+											out.println("<label style=\"width:62px;\">第" + i
+													+ "题&nbsp;&nbsp;&nbsp;&nbsp;</label>");
+											out.println("<label><input type=\"radio\" checked=\"checked\" name=\"choose"
+													+ i + "\" value=\"A\" /> A</label>");
+											out.println("<label><input type=\"radio\" name=\"choose" + i
+													+ "\" value=\"B\" /> B</label>");
+											out.println("<label><input type=\"radio\" name=\"choose" + i
+													+ "\" value=\"C\" /> C</label>");
+											out.println("<label><input type=\"radio\" name=\"choose" + i
+													+ "\" value=\"D\" /> D</label>");
+											out.println("</P>");
 										}
 										%>
 										</p>
 									</div>
 									<div class="tab-pane" id="panel-3">
-										<p>
-											作文：
-											<textarea cols="10" rows="5"></textarea>
-
-										</p>
+										<h3>作文</h3>
+										<textarea name="composition" cols="60" rows="15"></textarea>
+										<br>
+									</div>
+									<div class="tab-pane" id="panel-4">
+										<h3>翻译</h3>
+										<textarea name="translation" cols="60" rows="10"></textarea>
+										<br>
 									</div>
 								</div>
 							</div>
