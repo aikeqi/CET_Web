@@ -11,16 +11,22 @@
 
 <body>
 	<%
-		String answers = (String)session.getAttribute("answers");
-		
-		for (int i = 36; i <= 45; i++)
+		String answers = "";
+		for (int i = 1; i <= 25; i++)
+		{
+			String s = request.getParameter("choose" + i);
+			if (s == null || s.isEmpty())	s = "A";
+			answers += s;
+			answers += '_';
+		}
+		for (int i = 26; i <= 55; i++)
 		{
 			String s = request.getParameter("fill_blank" + i);
 			if (s == null) s= "";
 			answers += s;
 			answers += '_';
 		}
-		for (int i = 46; i <= 65; i++)
+		for (int i = 56; i <= 65; i++)
 		{
 			String s = request.getParameter("choose" + i);
 			if (s == null || s.isEmpty())	s = "A";
@@ -28,8 +34,8 @@
 			if (i != 65)
 				answers += '_';
 		}
-		session.setAttribute("translation", request.getParameter("translation"));
-		session.setAttribute("answers", answers);
+		String composition = request.getParameter("composition");
+		out.print(answers);
 	%>
 </body>
 </html>

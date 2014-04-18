@@ -6,19 +6,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>在线测试</title>
-<link rel="stylesheet"
-	href="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/css/bootstrap.min.css">
+<link rel="stylesheet" href="css/bootstrap.css">
 
 <!-- 可选的Bootstrap主题文件（一般不用引入） -->
-<link rel="stylesheet"
-	href="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="css/bootstrap-theme.css">
 
 <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-<script src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+<script src="js/jquery-2.1.0.js"></script>
 
 <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-<script
-	src="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<script src="js/bootstrap.js"></script>
 
 <script src="js/sco.countdown.js" type="text/javascript"></script>
 
@@ -35,6 +32,7 @@
 	<%
 		String stageone = "";
 		String name = "";
+		String state = (String) session.getAttribute("state");
 		String sql = "SELECT * FROM paper";
 		ResultSet rs = connDbBean.executeQuery(sql);
 		while (rs.next()) {
@@ -44,7 +42,7 @@
 	%>
 	<div class="container">
 		<div class="row">
-		<h1 id="time1">
+			<h1 id="time">
 				<script>
 					/*此处是网页计时器,到时自动提交数据*/
 					function Timer(id) {
@@ -56,23 +54,30 @@
 							Timer.show(this)();
 							this.timer = setInterval(Timer.show(this), 1000);
 						}
+
 						Timer.show = function(obj) {
 							return function() {
-								if (obj.count < 0) {
-									takemessage();
-									// document.getElementById(obj.id).innerHTML = "over";
+								if (obj.count == 7) {
+									takemessage1();
+								}else if(obj.count < 0){
+									takemessage2();
 									clearInterval(obj.timer);
 									return;
 								}
-								document.getElementById(obj.id).innerHTML = "剩余时间："+obj.count;
+								document.getElementById(obj.id).innerHTML = "剩余时间："
+										+ obj.count;
 								obj.count--;
 							}
 						}
 					}
 
-					function takemessage() {
+					/*当计时器结束，触发事件*/
+					function takemessage2() {
+						document.getElementById("submit").click();
+					}
 
-						var answer = getInputValue();
+					/*ajax对象处理*/
+					function takemessage1() {
 						if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
 							xmlhttp = new XMLHttpRequest();
 						} else {// code for IE6, IE5
@@ -81,21 +86,66 @@
 						xmlhttp.onreadystatechange = function() {
 							if (xmlhttp.readyState == 4
 									&& xmlhttp.status == 200) {
-								// document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
-								alert(xmlhttp.responseText);
+								document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
+								changeLabel();
+								//alert(xmlhttp.responseText);
 							}
 						}
 						xmlhttp.open("POST", "takemessage.jsp", true);
 						xmlhttp.setRequestHeader("Content-type",
 								"application/x-www-form-urlencoded");
-						xmlhttp.send("answer=" + answer);
+						xmlhttp.send("answer=");
 					}
 
-					function getInputValue() {
+					/*该方法是用来改变选项卡*/
+					function changeLabel() {
+						document.getElementById("#panel-3").href = "";
+						document.getElementById("#panel-1").href = "";
+						document.getElementById("#panel-2").href = "#panel-2";
+						document.getElementById("#panel-4").href = "#panel-4";
+						document.getElementById("#panel-2").click();
+					}
+
+					/*这个方法是用来获取选择题*/
+					function getChoose() {
 						var str = "";
 						var topicId = document.getElementsByName("choose");
-						for (var k = 0; k <= topicId.length; k++) {
-							var topic = document.getElementsByName("choose" + k);
+						for (var k = 0; k < topicId.length; k++) {
+							var topic = document
+									.getElementsByName("choose" + k);
+							for (var i = 0; i < topic.length; i++) {
+								if (topic[i].checked == true) {
+									if (str == "") {
+										str = topic[i].value;
+									} else {
+										str = str + "_" + topic[i].value;
+									}
+								}
+							}
+						}
+						return str;
+					}
+					/*这个方法功能是用来获取作文的答案*/
+					function getComposition() {
+						return document.getElementById("composition");
+					}
+
+					/*这个方法是用来获取完型填空题答案*/
+					function getBlank() {
+						var str = "";
+						var blanks = document.getElmentsByName("fill_blank");
+						for (var i = 0; i < blanks.length; i++) {
+							str = str + "_" + blacks[i].value;
+						}
+						return str;
+					}
+
+					/*这个方法是用来获取选择题*/
+					function getRead() {
+						var str = "";
+						var topicId = document.getElementsByName("read");
+						for (var k = 0; k < topicId.length; k++) {
+							var topic = document.getElementsByName("read" + k);
 							for (var i = 0; i < topic.length; i++) {
 								if (topic[i].checked == true) {
 									if (str == "") {
@@ -109,15 +159,21 @@
 						return str;
 					}
 
-					t1 = new Timer("time1");
-					t1.begin(50);
+					/*这个方法是用来获取翻译题答案*/
+					function getTranslation() {
+						return document.getElementById("translation");
+					}
+					
+					t1 = new Timer("time");
+					t1.begin(10);
 				</script>
 			</h1>
 		</div>
 		<div class="row">
-			<div class="col-md-8" style="background: lightblue; overflow-y:scroll; height:800px;">
+			<div class="col-md-8"
+				style="background: lightblue; overflow-y: scroll; height: 800px;">
 				<h1 class="text-center"><%=name%></h1>
-				<p>
+				<p id="txtHint">
 					<%
 						out.println(stageone);
 						rs.close();
@@ -125,8 +181,10 @@
 				</p>
 			</div>
 			<div class="col-md-4">
+			<form action="takesubmit.jsp" method="post">
 				<div>
-					<button type="button" class="btn btn-primary btn-lg btn-block"
+				
+					<button type="submit" class="btn btn-primary btn-lg btn-block" id="submit"
 						name="submit">&nbsp;&nbsp;提交&nbsp;&nbsp;</button>
 					<!-- 弹出对话框触发按钮-->
 					<button type="button" class="btn btn-default btn-lg btn-block"
@@ -134,18 +192,29 @@
 				</div>
 
 				<div class="container-fluid">
+				
 					<div class="row-fluid">
 						<h3 class="text-center">请在此处答题</h3>
 						<div class="span12">
 							<div class="tabbable" id="tabs-780530">
 								<ul class="nav nav-tabs">
-									<li><a href="#panel-3" data-toggle="tab">作文</a></li>
-									<li class="active"><a href="#panel-1" data-toggle="tab">听力</a></li>
-									<li><a href="#panel-2" data-toggle="tab">阅读理解</a></li>
-									<li><a href="#panel-4" data-toggle="tab">翻译</a></li>
+									<%
+										if (state != "2") {
+											out.println("<li><a id=\"#panel-3\" href=\"#panel-3\" data-toggle=\"tab\">作文</a></li>");
+											out.println("<li class=\"active\"><a id=\"#panel-1\" href=\"#panel-1\" data-toggle=\"tab\">听力</a></li>");
+											out.println("<li><a id=\"#panel-2\" href=\"\" data-toggle=\"tab\">阅读理解</a></li>");
+											out.println("<li><a id=\"#panel-4\" href=\"\" data-toggle=\"tab\">翻译</a></li>");
+										} else {
+											out.println("<li><a id=\"#panel-3\" href=\"\" data-toggle=\"tab\">作文</a></li>");
+											out.println("<li><a id=\"#panel-1\" href=\"\" data-toggle=\"tab\">听力</a></li>");
+											out.println("<li class=\"active\"><a id=\"#panel-2\" href=\"#panel-2\" data-toggle=\"tab\">阅读理解</a></li>");
+											out.println("<li><a id=\"#panel-4\" href=\"#panel-4\" data-toggle=\"tab\">翻译</a></li>");
+										}
+									%>
 								</ul>
 								<div class="tab-content">
-									<div class="tab-pane active" id="panel-1" style="overflow-y:scroll; height:500px;">
+									<div class="tab-pane active" id="panel-1"
+										style="overflow-y: scroll; height: 500px;">
 										<h4>选择题</h4>
 										<%
 											for (int i = 1; i <= 25; i++) {
@@ -164,46 +233,51 @@
 											}
 										%>
 										<h4>填空</h4>
-										<% 
-											for(int i=26; i<= 35; i++){
+										<%
+											for (int i = 26; i <= 35; i++) {
 												out.println("<div class=\"form-group\">");
-												out.println("<label for=\"inputAnswer\" class=\"col-sm-2 control-label\">第"+i+"题</label>");
+												out.println("<label for=\"inputAnswer\" class=\"col-sm-2 control-label\">第"
+														+ i + "题</label>");
 												out.println("<div class=\"col-sm-8\">");
-												out.println("<input name=\"fill_blank"+ i +"\"type=\"text\" class=\"form-control\" id=\"inputAnswer\" placeholder=\"请输入答案\">");
+												out.println("<input name=\"fill_blank"
+														+ i
+														+ "\"type=\"text\" class=\"form-control\" id=\"inputAnswer\" placeholder=\"请输入答案\">");
 												out.println("</div>");
 												out.println("</div>");
 											}
 										%>
 									</div>
-									<div class="tab-pane" id="panel-2" style="overflow-y:scroll; height:500px;">
+									<div class="tab-pane" id="panel-2"
+										style="overflow-y: scroll; height: 500px;">
 										<p>
 										<h4>完形填空</h4>
 										<%
-										for(int i=36; i<= 45; i++){
-											out.println("<div class=\"form-group\">");
-											out.println("<label for=\"inputAnswer\" class=\"col-sm-2 control-label\">第"+i+"题</label>");
-											out.println("<div class=\"col-sm-8\">");
-											out.println("<input name=\"fill_blank"+ i +"\"type=\"text\" class=\"form-control\" id=\"inputAnswer\" placeholder=\"请输入答案\">");
-											out.println("</div>");
-											out.println("</div>");
-										}
+											for (int i = 36; i <= 55; i++) {
+												out.println("<div class=\"form-group\">");
+												out.println("<label for=\"inputAnswer\" class=\"col-sm-2 control-label\">第"
+														+ i + "题</label>");
+												out.println("<div class=\"col-sm-8\">");
+												out.println("<input name=\"fill_blank"+ i +"\" type=\"text\" class=\"form-control\" id=\"inputAnswer\" placeholder=\"请输入答案\">");
+												out.println("</div>");
+												out.println("</div>");
+											}
 										%>
 										<h4>阅读</h4>
 										<%
-										for (int i = 46; i <= 65; i++) {
-											out.println("<P name=\"choose\">");
-											out.println("<label style=\"width:62px;\">第" + i
-													+ "题&nbsp;&nbsp;&nbsp;&nbsp;</label>");
-											out.println("<label><input type=\"radio\" checked=\"checked\" name=\"choose"
-													+ i + "\" value=\"A\" /> A</label>");
-											out.println("<label><input type=\"radio\" name=\"choose" + i
-													+ "\" value=\"B\" /> B</label>");
-											out.println("<label><input type=\"radio\" name=\"choose" + i
-													+ "\" value=\"C\" /> C</label>");
-											out.println("<label><input type=\"radio\" name=\"choose" + i
-													+ "\" value=\"D\" /> D</label>");
-											out.println("</P>");
-										}
+											for (int i = 56; i <= 65; i++) {
+												out.println("<P name=\"read\">");
+												out.println("<label style=\"width:62px;\">第" + i
+														+ "题&nbsp;&nbsp;&nbsp;&nbsp;</label>");
+												out.println("<label><input type=\"radio\" checked=\"checked\" name=\"choose"
+														+ i + "\" value=\"A\" /> A</label>");
+												out.println("<label><input type=\"radio\" name=\"choose" + i
+														+ "\" value=\"B\" /> B</label>");
+												out.println("<label><input type=\"radio\" name=\"choose" + i
+														+ "\" value=\"C\" /> C</label>");
+												out.println("<label><input type=\"radio\" name=\"choose" + i
+														+ "\" value=\"D\" /> D</label>");
+												out.println("</P>");
+											}
 										%>
 										</p>
 									</div>
@@ -222,6 +296,7 @@
 
 						</div>
 					</div>
+					</from>
 				</div>
 
 				<!-- 弹出对话框样式 -->
