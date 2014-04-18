@@ -12,6 +12,7 @@
 <body>
 	<%
 		String bookid = (String)session.getAttribute("bookid");
+		String username = (String)session.getAttribute("username");
 		String sql = "select * from user where bookid='" + bookid + "'";
 		
 		String state = null;

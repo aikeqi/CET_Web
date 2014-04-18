@@ -35,7 +35,25 @@
 				answers += '_';
 		}
 		String composition = request.getParameter("composition");
-		out.print(answers);
+		String translation = request.getParameter("translation");
+		String bookid = (String)session.getAttribute("bookid");
+		String state = (String)session.getAttribute("state");
+		String time = (String)session.getAttribute("time");
+		String sql = "update user set answers='" + answers + "', composition='" + composition + "', translation='"
+				+ translation + "', state='"+ state +"', time='"+time+"' where bookid='" + bookid + "';";
+		try {
+			int res = connDbBean.executeUpdate(sql);
+			if (res != 0)
+			{
+				out.print(time);
+				response.sendRedirect("examDone.jsp");
+			}
+			out.print("OH ho");
+			response.sendRedirect("examDone.jsp");
+		} catch(Exception e) {
+			
+		}
+		out.print(answers +  composition + translation);
 	%>
 </body>
 </html>

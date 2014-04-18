@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	import="java.sql.*" pageEncoding="UTF-8"%>
 <jsp:useBean id="connDbBean" class="dataconn.dataconn" />
+<jsp:useBean id="htmlEncode" scope="page" class="HTMLEncode.HTMLEncode" />
 <%
 	request.setCharacterEncoding("utf-8");
 // 	String answers = null;
@@ -22,10 +23,11 @@
 // 	String sql2 = "UPDATE user set answers = '"+answers+"' WHERE name = '"+username+"'";
 // 	int result = connDbBean.executeUpdate(sql2);
 // 	if (result != 0) {
+		session.setAttribute("state", "2");
 		String sql3 = "SELECT * FROM paper";
 		ResultSet rs2 = connDbBean.executeQuery(sql3);
 		if (rs2.next()) {
-			out.println(rs2.getString("stagetwo"));
+			out.println(htmlEncode.HTMLEncode(rs2.getString("stagetwo")));
 		}
 // 	}
 %>

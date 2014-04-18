@@ -50,7 +50,7 @@
 // 					out.print("A_");
 			%>
 		</div>
-		<form class="form-horizontal">
+		<form class="form-horizontal" action="startExam.jsp" method="post">
 			<fieldset>
 				<div id="legend" class="form-head">
 					<legend class="">CET4/CET6模拟测试</legend>
@@ -85,7 +85,7 @@
 
 					<!-- Button -->
 					<div class="controls">
-						<button class="btn btn-primary">确定</button>
+						<button type="submit" class="btn btn-primary">确定</button>
 					</div>
 					
 				</div>
