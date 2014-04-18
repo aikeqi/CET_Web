@@ -123,8 +123,8 @@
 					}
 					else
 					{
-						out.print("<li><a>首页</a></li>"); 
-						out.print("<li><a>上一页</a></li>");
+						out.print("<li><a href=\"\">首页</a></li>"); 
+						out.print("<li><a href=\"\">上一页</a></li>");
 					}
 					out.print("<li><a>第" + page_now + "页</a></li>");
 					if (page_now != page_total)
@@ -134,8 +134,8 @@
 					}
 					else
 					{
-						out.print("<li><a>下一页</a></li>");
-						out.print("<li><a>尾页</a></li>");
+						out.print("<li><a href=\"\">下一页</a></li>");
+						out.print("<li><a href=\"\">尾页</a></li>");
 					}
 				%>
 				</ul>

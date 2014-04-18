@@ -42,6 +42,12 @@
 					out.println(session.getAttribute("username")+" / <a href='logout.jsp'>注销</a>");
 				}
 				//session.invalidate();
+// 				for (int i = 1; i <= 25; i++)
+// 					out.print("A_");
+// 				for (int i = 26; i <= 55; i++)
+// 					out.print("_");
+// 				for (int i = 56; i <= 65; i++)
+// 					out.print("A_");
 			%>
 		</div>
 		<form class="form-horizontal">
