@@ -13,8 +13,8 @@
 	if (rs.next()) {
 		out.println("exist");
 	} else {
-		String sql2 = "INSERT INTO book(english, englishtype, chinese) VALUES('"
-				+ word + "', '" + property + "', '" + mean + "');";
+		String sql2 = "INSERT INTO book(bookid, english, englishtype, chinese) VALUES('"
+				+ bookid + "','" + word + "', '" + property + "', '" + mean + "');";
 		int result = connDbBean.executeUpdate(sql2);
 		if (result != 0) {
 			out.println("ok");
